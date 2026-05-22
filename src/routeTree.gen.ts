@@ -9,38 +9,194 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosRouteImport } from './routes/termos'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as ImoveisRouteImport } from './routes/imoveis'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ComoTrabalhamosRouteImport } from './routes/como-trabalhamos'
+import { Route as AnuncieSeuImovelRouteImport } from './routes/anuncie-seu-imovel'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ImoveisSlugRouteImport } from './routes/imoveis.$slug'
 
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImoveisRoute = ImoveisRouteImport.update({
+  id: '/imoveis',
+  path: '/imoveis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoTrabalhamosRoute = ComoTrabalhamosRouteImport.update({
+  id: '/como-trabalhamos',
+  path: '/como-trabalhamos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnuncieSeuImovelRoute = AnuncieSeuImovelRouteImport.update({
+  id: '/anuncie-seu-imovel',
+  path: '/anuncie-seu-imovel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImoveisSlugRoute = ImoveisSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ImoveisRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/anuncie-seu-imovel': typeof AnuncieSeuImovelRoute
+  '/como-trabalhamos': typeof ComoTrabalhamosRoute
+  '/contato': typeof ContatoRoute
+  '/imoveis': typeof ImoveisRouteWithChildren
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
+  '/imoveis/$slug': typeof ImoveisSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/anuncie-seu-imovel': typeof AnuncieSeuImovelRoute
+  '/como-trabalhamos': typeof ComoTrabalhamosRoute
+  '/contato': typeof ContatoRoute
+  '/imoveis': typeof ImoveisRouteWithChildren
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
+  '/imoveis/$slug': typeof ImoveisSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/anuncie-seu-imovel': typeof AnuncieSeuImovelRoute
+  '/como-trabalhamos': typeof ComoTrabalhamosRoute
+  '/contato': typeof ContatoRoute
+  '/imoveis': typeof ImoveisRouteWithChildren
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
+  '/imoveis/$slug': typeof ImoveisSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/anuncie-seu-imovel'
+    | '/como-trabalhamos'
+    | '/contato'
+    | '/imoveis'
+    | '/politica-de-privacidade'
+    | '/sobre'
+    | '/termos'
+    | '/imoveis/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/anuncie-seu-imovel'
+    | '/como-trabalhamos'
+    | '/contato'
+    | '/imoveis'
+    | '/politica-de-privacidade'
+    | '/sobre'
+    | '/termos'
+    | '/imoveis/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/anuncie-seu-imovel'
+    | '/como-trabalhamos'
+    | '/contato'
+    | '/imoveis'
+    | '/politica-de-privacidade'
+    | '/sobre'
+    | '/termos'
+    | '/imoveis/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnuncieSeuImovelRoute: typeof AnuncieSeuImovelRoute
+  ComoTrabalhamosRoute: typeof ComoTrabalhamosRoute
+  ContatoRoute: typeof ContatoRoute
+  ImoveisRoute: typeof ImoveisRouteWithChildren
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  SobreRoute: typeof SobreRoute
+  TermosRoute: typeof TermosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imoveis': {
+      id: '/imoveis'
+      path: '/imoveis'
+      fullPath: '/imoveis'
+      preLoaderRoute: typeof ImoveisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-trabalhamos': {
+      id: '/como-trabalhamos'
+      path: '/como-trabalhamos'
+      fullPath: '/como-trabalhamos'
+      preLoaderRoute: typeof ComoTrabalhamosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anuncie-seu-imovel': {
+      id: '/anuncie-seu-imovel'
+      path: '/anuncie-seu-imovel'
+      fullPath: '/anuncie-seu-imovel'
+      preLoaderRoute: typeof AnuncieSeuImovelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +204,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/imoveis/$slug': {
+      id: '/imoveis/$slug'
+      path: '/$slug'
+      fullPath: '/imoveis/$slug'
+      preLoaderRoute: typeof ImoveisSlugRouteImport
+      parentRoute: typeof ImoveisRoute
+    }
   }
 }
 
+interface ImoveisRouteChildren {
+  ImoveisSlugRoute: typeof ImoveisSlugRoute
+}
+
+const ImoveisRouteChildren: ImoveisRouteChildren = {
+  ImoveisSlugRoute: ImoveisSlugRoute,
+}
+
+const ImoveisRouteWithChildren =
+  ImoveisRoute._addFileChildren(ImoveisRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnuncieSeuImovelRoute: AnuncieSeuImovelRoute,
+  ComoTrabalhamosRoute: ComoTrabalhamosRoute,
+  ContatoRoute: ContatoRoute,
+  ImoveisRoute: ImoveisRouteWithChildren,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  SobreRoute: SobreRoute,
+  TermosRoute: TermosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
