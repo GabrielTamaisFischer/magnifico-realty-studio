@@ -37,7 +37,8 @@ export const Route = createFileRoute("/imoveis/$slug")({
 });
 
 function PropertyPage() {
-  const { property: p } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { property: ReturnType<typeof getPropertyBySlug> };
+  const p = data.property!;
   const [active, setActive] = useState(0);
   const similar = properties.filter((x) => x.id !== p.id && x.type === p.type).slice(0, 3);
 
