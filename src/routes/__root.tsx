@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "MagnificoImoveis" },
+      { name: "description", content: "Magnifico Realty Studio is a premium real estate website and admin panel for showcasing properties and managing leads." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "MagnificoImoveis" },
+      { property: "og:description", content: "Magnifico Realty Studio is a premium real estate website and admin panel for showcasing properties and managing leads." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "MagnificoImoveis" },
+      { name: "twitter:description", content: "Magnifico Realty Studio is a premium real estate website and admin panel for showcasing properties and managing leads." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/SK7CqTh1H5Wnx4K9K8UmUluwJeP2/social-images/social-1779555625988-logoc-339x128-78.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/SK7CqTh1H5Wnx4K9K8UmUluwJeP2/social-images/social-1779555625988-logoc-339x128-78.webp" },
     ],
     links: [
       {
