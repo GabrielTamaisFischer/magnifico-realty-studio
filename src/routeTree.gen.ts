@@ -17,7 +17,7 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoTrabalhamosRouteImport } from './routes/como-trabalhamos'
 import { Route as AnuncieSeuImovelRouteImport } from './routes/anuncie-seu-imovel'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ImoveisSlugRouteImport } from './routes/imoveis.$slug'
+import { Route as ImoveisSlugRouteImport } from './routes/imoveis_.$slug'
 
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
@@ -60,9 +60,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImoveisSlugRoute = ImoveisSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ImoveisRoute,
+  id: '/imoveis_/$slug',
+  path: '/imoveis/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -70,7 +70,7 @@ export interface FileRoutesByFullPath {
   '/anuncie-seu-imovel': typeof AnuncieSeuImovelRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
-  '/imoveis': typeof ImoveisRouteWithChildren
+  '/imoveis': typeof ImoveisRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
@@ -81,7 +81,7 @@ export interface FileRoutesByTo {
   '/anuncie-seu-imovel': typeof AnuncieSeuImovelRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
-  '/imoveis': typeof ImoveisRouteWithChildren
+  '/imoveis': typeof ImoveisRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
@@ -93,11 +93,11 @@ export interface FileRoutesById {
   '/anuncie-seu-imovel': typeof AnuncieSeuImovelRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
-  '/imoveis': typeof ImoveisRouteWithChildren
+  '/imoveis': typeof ImoveisRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
-  '/imoveis/$slug': typeof ImoveisSlugRoute
+  '/imoveis_/$slug': typeof ImoveisSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,7 +132,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/sobre'
     | '/termos'
-    | '/imoveis/$slug'
+    | '/imoveis_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,10 +140,11 @@ export interface RootRouteChildren {
   AnuncieSeuImovelRoute: typeof AnuncieSeuImovelRoute
   ComoTrabalhamosRoute: typeof ComoTrabalhamosRoute
   ContatoRoute: typeof ContatoRoute
-  ImoveisRoute: typeof ImoveisRouteWithChildren
+  ImoveisRoute: typeof ImoveisRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   SobreRoute: typeof SobreRoute
   TermosRoute: typeof TermosRoute
+  ImoveisSlugRoute: typeof ImoveisSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -204,37 +205,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/imoveis/$slug': {
-      id: '/imoveis/$slug'
-      path: '/$slug'
+    '/imoveis_/$slug': {
+      id: '/imoveis_/$slug'
+      path: '/imoveis/$slug'
       fullPath: '/imoveis/$slug'
       preLoaderRoute: typeof ImoveisSlugRouteImport
-      parentRoute: typeof ImoveisRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface ImoveisRouteChildren {
-  ImoveisSlugRoute: typeof ImoveisSlugRoute
-}
-
-const ImoveisRouteChildren: ImoveisRouteChildren = {
-  ImoveisSlugRoute: ImoveisSlugRoute,
-}
-
-const ImoveisRouteWithChildren =
-  ImoveisRoute._addFileChildren(ImoveisRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnuncieSeuImovelRoute: AnuncieSeuImovelRoute,
   ComoTrabalhamosRoute: ComoTrabalhamosRoute,
   ContatoRoute: ContatoRoute,
-  ImoveisRoute: ImoveisRouteWithChildren,
+  ImoveisRoute: ImoveisRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   SobreRoute: SobreRoute,
   TermosRoute: TermosRoute,
+  ImoveisSlugRoute: ImoveisSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
