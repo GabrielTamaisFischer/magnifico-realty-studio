@@ -6,7 +6,7 @@ import { Layout } from "@/components/site/Layout";
 import { PropertyCard } from "@/components/site/PropertyCard";
 import { getPropertyBySlug, properties, formatBRL } from "@/data/properties";
 
-export const Route = createFileRoute("/imoveis/$slug")({
+export const Route = createFileRoute("/imoveis_/$slug")({
   loader: ({ params }) => {
     const p = getPropertyBySlug(params.slug);
     if (!p) throw notFound();
